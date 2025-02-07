@@ -33,7 +33,7 @@ public class GetOrderDTO {
         this.time=order.getTime();
         orderItemList=new LinkedList<>();
         for(OrderItem orderItem:order.getOrderItem()){
-            orderItemList.add(new GetOrderDTO.OrderItems(orderItem.getBook().getBookId(),orderItem.getBook().getBookName(),orderItem.getPrice(),orderItem.getBookNumber()));
+            orderItemList.add(new GetOrderDTO.OrderItems(orderItem.getBook().getBookId(),orderItem.getBook().getTitle(),orderItem.getPrice(),orderItem.getBookNumber()));
         }
 
 
