@@ -15,11 +15,6 @@ public class MsgUtil {
     public static final String LOGIN_USER_ERROR_MSG = "Username or Password Wrong! Try Again!";
     public static final String NOT_LOGGED_IN_ERROR_MSG = "Login out of Date! Please Login Again!";
 
-    public static final String ACCOUNT_BAN = "You are Banned!";
-    public static  final String SUCCESS_BAN = "Successfully Banned!";
-    public static  final String ERROR_BAN = "Ban Error!";
-    public static  final String SUCCESS_UNBAN = "Successfully Unbanned!";
-    public static  final String ERROR_UNBAN = "Unban Error!";
 
     public static  final String SUCCESS_ADDBOOK = "Add Book Successfully!";
     public static  final String ERROR_ADDBOOK = "Add Book Error!";

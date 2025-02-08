@@ -10,9 +10,6 @@ public interface UserService {
     User checkUser(String username,String password);
     List<User> getAllUsers();
 
-    Msg banUser(Integer userId);
-
-    Msg unBanUser(Integer userId);
 
     Msg checkUsernameDup(String username);
 

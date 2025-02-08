@@ -46,33 +46,9 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    @Override
-    public Msg banUser(Integer userId) {
-        JSONObject auth = SessionUtil.getAuth();
-        User user = userDao.getUserById(userId);
-        if(auth != null && Objects.equals(auth.getString(Constant.USER_TYPE), "admin") && user.getUserType().equals("customer")){
-            user.setUserType("ban");
-            userDao.saveUser(user);
-            return MsgUtil.makeMsg(MsgUtil.SUCCESS,MsgUtil.SUCCESS_BAN);
-        }
-        else {
-            return MsgUtil.makeMsg(MsgUtil.ERROR,MsgUtil.ERROR_BAN);
-        }
-    }
 
-    @Override
-    public Msg unBanUser(Integer userId) {
-        JSONObject auth = SessionUtil.getAuth();
-        User user = userDao.getUserById(userId);
-        if(auth != null && Objects.equals(auth.getString(Constant.USER_TYPE), "admin") && user.getUserType().equals("ban")){
-            user.setUserType("customer");
-            userDao.saveUser(user);
-            return MsgUtil.makeMsg(MsgUtil.SUCCESS,MsgUtil.SUCCESS_UNBAN);
-        }
-        else {
-            return MsgUtil.makeMsg(MsgUtil.ERROR,MsgUtil.ERROR_UNBAN);
-        }
-    }
+
+
 
     @Override
     public Msg checkUsernameDup(String username) {

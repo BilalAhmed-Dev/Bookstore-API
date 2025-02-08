@@ -29,17 +29,9 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @PostMapping("/ban")
-    public Msg ban(@RequestParam("userId") Integer userId){
-        System.out.println("ban");
-        return userService.banUser(userId);
-    }
 
-    @PutMapping("/unban")
-    public Msg unban(@RequestParam("userId") Integer userId){
-        System.out.println("unban");
-        return userService.unBanUser(userId);
-    }
+
+
 
     @GetMapping("/checkDup")
     public Msg checkDup(@RequestParam("username") String userName){
