@@ -1,6 +1,7 @@
 package com.backend.test.bookstore.controller;
 
 import com.backend.test.bookstore.constant.Constant;
+import com.backend.test.bookstore.dto.NewUserDTO;
 import com.backend.test.bookstore.entity.User;
 import com.backend.test.bookstore.service.UserService;
 import com.backend.test.bookstore.utils.msgutils.Msg;
@@ -52,6 +53,12 @@ public class LoginController {
             return MsgUtil.makeMsg(MsgCode.SUCCESS, MsgUtil.LOGOUT_SUCCESS_MSG);
         }
         return MsgUtil.makeMsg(MsgCode.ERROR, MsgUtil.LOGOUT_ERR_MSG);
+    }
+
+    @PostMapping("/register")
+    public Msg register(@RequestBody NewUserDTO newUserDTO){
+        System.out.println("register");
+        return userService.addUser(newUserDTO);
     }
 
     @GetMapping("/checkSession")

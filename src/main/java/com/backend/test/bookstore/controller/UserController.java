@@ -39,9 +39,5 @@ public class UserController {
         return userService.checkUsernameDup(userName);
     }
 
-    @PostMapping("/register")
-    public Msg register(@RequestBody NewUserDTO newUserDTO){
-        System.out.println("register");
-        return userService.addUser(newUserDTO);
-    }
+
 }
