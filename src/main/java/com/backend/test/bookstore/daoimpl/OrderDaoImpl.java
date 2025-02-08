@@ -11,8 +11,11 @@ import java.util.List;
 @Repository
 public class OrderDaoImpl implements OrderDao {
 
-    @Autowired
-    private OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
+
+    public OrderDaoImpl(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
     @Override
     public List<Order> getOrderByUserId(int userId) {

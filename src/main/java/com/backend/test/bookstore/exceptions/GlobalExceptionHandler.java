@@ -1,74 +1,66 @@
 package com.backend.test.bookstore.exceptions;
 
-import com.backend.test.bookstore.dto.ErrorResponseDTO;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
+import com.backend.test.bookstore.dto.ApiExceptionContainer;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import com.backend.test.bookstore.exceptions.base.BookstoreAuthorisationException;
+import com.backend.test.bookstore.exceptions.base.BookstoreException;
+import com.backend.test.bookstore.exceptions.base.BookstoreNotFoundException;
+import com.backend.test.bookstore.exceptions.base.BookstoreValidationException;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 
-@RestControllerAdvice
-public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    // Handle custom resource not found exceptions
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ErrorResponseDTO> handleResourceNotFound(
-            ResourceNotFoundException ex, WebRequest request) {
+@ControllerAdvice(basePackages = "com.backend.test.bookstore.controller")
+public class GlobalExceptionHandler {
 
-        ErrorResponseDTO error = new ErrorResponseDTO(
-                LocalDateTime.now(),
-                HttpStatus.NOT_FOUND.value(),
-                "Resource Not Found",
-                ex.getMessage(),
-                request.getDescription(false)
-        );
 
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    @ExceptionHandler(BookstoreValidationException.class)
+    public ResponseEntity<ApiExceptionContainer> handle(BookstoreValidationException opinaValidationException) {
+        System.out.println("EXCEPTION: " + opinaValidationException.getClass().getSimpleName() + "  " + LocalDateTime.now());
+        System.out.println(opinaValidationException.getMessage());
+        ApiExceptionContainer apiExceptionContainer = new ApiExceptionContainer(opinaValidationException.getClass().getSimpleName(), opinaValidationException.getMessage(), null);
+        return ResponseEntity.badRequest().body(apiExceptionContainer);
     }
 
-    // Handle validation errors from @Valid annotations
-    @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(
-            MethodArgumentNotValidException ex,
-            HttpHeaders headers,
-            HttpStatus status,
-            WebRequest request) {
-
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getFieldErrors().forEach(error ->
-                errors.put(error.getField(), error.getDefaultMessage()));
-
-        ErrorResponseDTO error = new ErrorResponseDTO(
-                LocalDateTime.now(),
-                HttpStatus.BAD_REQUEST.value(),
-                "Validation Failed",
-                "Invalid request parameters",
-                errors.toString()
-        );
-
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(BookstoreNotFoundException.class)
+    public ResponseEntity<ApiExceptionContainer> handle(BookstoreNotFoundException opinaNotFoundException) {
+        System.out.println("EXCEPTION: " + opinaNotFoundException.getClass().getSimpleName() + "  " + LocalDateTime.now());
+        if (opinaNotFoundException.getMessage() != null) {
+            System.out.println(opinaNotFoundException.getMessage());
+        }
+        ApiExceptionContainer apiExceptionContainer = new ApiExceptionContainer(opinaNotFoundException.getClass().getSimpleName(), opinaNotFoundException.getMessage(), null);
+        return ResponseEntity.status(404).body(apiExceptionContainer);
     }
 
-    // Handle all other exceptions
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponseDTO> handleAllExceptions(
-            Exception ex, WebRequest request) {
+    @ExceptionHandler(BookstoreAuthorisationException.class)
+    public ResponseEntity<ApiExceptionContainer> handle(BookstoreAuthorisationException opinaAuthorisationException) {
+        System.out.println("EXCEPTION: " + opinaAuthorisationException.getClass().getSimpleName() + "  " + LocalDateTime.now());
+        if (opinaAuthorisationException.getMessage() != null) {
+            System.out.println(opinaAuthorisationException.getMessage());
+        }
+        ApiExceptionContainer apiExceptionContainer = new ApiExceptionContainer(opinaAuthorisationException.getClass().getSimpleName(), opinaAuthorisationException.getMessage(), null);
+        return ResponseEntity.status(403).body(apiExceptionContainer);
+    }
 
-        ErrorResponseDTO error = new ErrorResponseDTO(
-                LocalDateTime.now(),
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                "Internal Server Error",
-                ex.getMessage(),
-                request.getDescription(false)
-        );
+    @ExceptionHandler(BookstoreException.class)
+    public ResponseEntity<ApiExceptionContainer> handle(BookstoreException opinaException) {
+        System.out.println("EXCEPTION: " + opinaException.getClass().getSimpleName() + "  " + LocalDateTime.now());
+        if (opinaException.getMessage() != null) {
+            System.out.println(opinaException.getMessage());
+        }
 
-        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+        ApiExceptionContainer apiExceptionContainer = new ApiExceptionContainer(opinaException.getClass().getSimpleName(), opinaException.getMessage(), null);
+        return ResponseEntity.internalServerError().body(apiExceptionContainer);
+    }
+
+    @ExceptionHandler(Throwable.class)
+    public synchronized ResponseEntity<ApiExceptionContainer> handle(Throwable throwable) {
+        System.out.println("EXCEPTION THROWABLE: " + throwable.getClass().getSimpleName() + "  " + LocalDateTime.now());
+        throwable.printStackTrace();
+
+        ApiExceptionContainer apiExceptionContainer = new ApiExceptionContainer(throwable.getClass().getSimpleName(), "Sunucu hatası. En kısa zamanda ilgileniyoruz.", null);
+        return ResponseEntity.internalServerError().body(apiExceptionContainer);
     }
 }

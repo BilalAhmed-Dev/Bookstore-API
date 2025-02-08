@@ -11,8 +11,11 @@ import java.util.List;
 @Repository
 public class CartDaoImpl implements CartDao {
 
-    @Autowired
-    private CartItemRepository cartItemRepository;
+    private final CartItemRepository cartItemRepository;
+
+    public CartDaoImpl(CartItemRepository cartItemRepository) {
+        this.cartItemRepository = cartItemRepository;
+    }
 
     @Override
     public CartItem getCartItemById(Integer cartItemId) {

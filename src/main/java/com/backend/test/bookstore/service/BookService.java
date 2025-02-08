@@ -2,7 +2,7 @@ package com.backend.test.bookstore.service;
 
 import com.backend.test.bookstore.dto.NewBookDTO;
 import com.backend.test.bookstore.entity.Book;
-import com.backend.test.bookstore.utils.msgutils.Msg;
+import com.backend.test.bookstore.utils.Msg;
 
 import java.util.List;
 

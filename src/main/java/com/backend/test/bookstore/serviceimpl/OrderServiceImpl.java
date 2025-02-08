@@ -1,6 +1,5 @@
 package com.backend.test.bookstore.serviceimpl;
 
-import com.backend.test.bookstore.constant.Constant;
 import com.backend.test.bookstore.dao.BookDao;
 import com.backend.test.bookstore.dao.CartDao;
 import com.backend.test.bookstore.dao.OrderDao;
@@ -11,8 +10,6 @@ import com.backend.test.bookstore.entity.Book;
 import com.backend.test.bookstore.entity.Order;
 import com.backend.test.bookstore.entity.OrderItem;
 import com.backend.test.bookstore.service.OrderService;
-import com.backend.test.bookstore.utils.sessionutils.SessionUtil;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -37,36 +34,26 @@ public class OrderServiceImpl implements OrderService {
     private UserDao userDao;
 
     @Override
-    public List<GetOrderDTO> getOrder() {
-        JSONObject auth = SessionUtil.getAuth();
-        if(auth != null){
+    public List<GetOrderDTO> getOrder(Integer userId) {
             List<Order> orderList;
-            if(auth.getString(Constant.USER_TYPE).equals("admin")){
-                orderList=orderDao.getAllOrders();
-            }
-            else {
-                orderList=orderDao.getOrderByUserId(auth.getInt(Constant.USER_ID));
-            }
+            orderList=orderDao.getOrderByUserId(userId);
+          
             List<GetOrderDTO> getOrderDTOList=new LinkedList<>();
             for(Order order:orderList){
                 getOrderDTOList.add(new GetOrderDTO(order));
             }
             return getOrderDTOList;
-        }
-        else {
-            return null;
-        }
+       
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public Order addOrder(NewOrderDTO newOrderDTO) {
-        JSONObject auth = SessionUtil.getAuth();
-        if(auth != null){
+    public Order addOrder(NewOrderDTO newOrderDTO, Integer userId) {
+
             Order newOrder = new Order();
             Timestamp orderTime = new Timestamp(System.currentTimeMillis());
             newOrder.setTime(orderTime);
-            newOrder.setUser(userDao.getUserById(auth.getInt(Constant.USER_ID)));
+            newOrder.setUser(userDao.getUserById(userId));
             List<OrderItem> orderItemList = new LinkedList<>();
             for (NewOrderDTO.OrderItem orderItem: newOrderDTO.getOrderItemList()) {
                 OrderItem newOrderItem = new OrderItem();
@@ -82,13 +69,10 @@ public class OrderServiceImpl implements OrderService {
                 bookDao.saveBook(book);
             }
             newOrder.setOrderItem(orderItemList);
-            cartDao.deleteCartByUserId(auth.getInt(Constant.USER_ID));
-            if(orderItemList.size() == 0) return newOrder;
+            cartDao.deleteCartByUserId(userId);
+            if(orderItemList.isEmpty()) return newOrder;
             return orderDao.saveOrder(newOrder);
-        }
-        else {
-            return null;
-        }
+       
     }
 
 

@@ -6,6 +6,6 @@ import com.backend.test.bookstore.entity.Order;
 import java.util.List;
 
 public interface OrderService {
-    List<GetOrderDTO> getOrder();
-    Order addOrder(NewOrderDTO newOrderDTO);
+    List<GetOrderDTO> getOrder(Integer userId);
+    Order addOrder(NewOrderDTO newOrderDTO, Integer userId);
 }

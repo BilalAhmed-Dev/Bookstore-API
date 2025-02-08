@@ -8,12 +8,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public class BookDaoImpl implements BookDao {
-    @Autowired
-    private BookRepository bookRepository;
+    private final BookRepository bookRepository;
+
+    public BookDaoImpl(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
     @Override
     public Book findOne(Integer id){
-        return bookRepository.getOne(id);
+        return bookRepository.getById(id);
     }
     @Override
     public List<Book> searchBooks(String title, String author, String genre) {

@@ -3,8 +3,7 @@ package com.backend.test.bookstore.controller;
 import com.backend.test.bookstore.dto.NewBookDTO;
 import com.backend.test.bookstore.entity.Book;
 import com.backend.test.bookstore.service.BookService;
-import com.backend.test.bookstore.utils.msgutils.Msg;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.backend.test.bookstore.utils.Msg;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,8 +12,11 @@ import java.util.List;
 @RequestMapping("/books") // Base path for book-related endpoints
 public class BookController {
 
-    @Autowired
-    private BookService bookService;
+    private final BookService bookService;
+
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
+    }
 
     @GetMapping("/getBooks")
     public List<Book> getBooks() {
@@ -38,9 +40,12 @@ public class BookController {
     }
 
     @PostMapping("/addBook")
-    public Msg addBook(@RequestBody NewBookDTO newBookDTO){
-        System.out.println("addBook");
-        return bookService.addBook(newBookDTO);
+    public Msg addBook(
+            @RequestBody NewBookDTO newBookDTO
+
+    ) {
+
+        return bookService.addBook(newBookDTO );
     }
 
     @DeleteMapping("/deleteBook")

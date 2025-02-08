@@ -1,4 +1,4 @@
-package com.backend.test.bookstore.utils.msgutils;
+package com.backend.test.bookstore.utils;
 
 
 import lombok.Getter;
