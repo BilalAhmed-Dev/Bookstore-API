@@ -2,9 +2,9 @@ package com.backend.test.bookstore.controller;
 
 import com.backend.test.bookstore.dto.NewUserDTO;
 import com.backend.test.bookstore.dto.AuthenticationResponseDTO;
-import com.backend.test.bookstore.dto.TokenContainerDTO;
-import com.backend.test.bookstore.serviceimpl.AuthenticationService;
-import com.backend.test.bookstore.serviceimpl.JwtService;
+import com.backend.test.bookstore.records.TokenContainerDTO;
+import com.backend.test.bookstore.serviceimpl.AuthenticationServiceImpl;
+import com.backend.test.bookstore.serviceimpl.JwtServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/auth")
 public class AuthenticationController {
 
-    private final AuthenticationService authService;
-    private final JwtService jwtService;
+    private final AuthenticationServiceImpl authService;
+    private final JwtServiceImpl jwtService;
 
-    public AuthenticationController(AuthenticationService authService, JwtService jwtService) {
+    public AuthenticationController(AuthenticationServiceImpl authService, JwtServiceImpl jwtService) {
         this.authService = authService;
         this.jwtService = jwtService;
     }

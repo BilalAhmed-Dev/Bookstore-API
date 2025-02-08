@@ -6,6 +6,7 @@ import com.backend.test.bookstore.dto.AuthenticationResponseDTO;
 import com.backend.test.bookstore.dto.UserInfoDTO;
 import com.backend.test.bookstore.entity.User;
 import com.backend.test.bookstore.exceptions.InvalidUsernameOrPasswordException;
+import com.backend.test.bookstore.service.AuthenticationService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,23 +15,24 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 @Service
-public class AuthenticationService {
+public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
-    private final JwtService jwtService;
+    private final JwtServiceImpl jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationService(UserDao userDao,
-                                 PasswordEncoder passwordEncoder,
-                                 JwtService jwtService,
-                                 AuthenticationManager authenticationManager) {
+    public AuthenticationServiceImpl(UserDao userDao,
+                                     PasswordEncoder passwordEncoder,
+                                     JwtServiceImpl jwtService,
+                                     AuthenticationManager authenticationManager) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
     }
 
+    @Override
     public AuthenticationResponseDTO register(NewUserDTO user) {
         User userEntity = new User();
         userEntity.setUsername(user.getUsername());
@@ -40,7 +42,7 @@ public class AuthenticationService {
 
         return buildAuthenticationResponse(savedUser);
     }
-
+    @Override
     public AuthenticationResponseDTO login(NewUserDTO userRequest) {
         authenticateUser(userRequest.getEmail(), userRequest.getPassword());
 
@@ -49,7 +51,7 @@ public class AuthenticationService {
 
         return buildAuthenticationResponse(user);
     }
-
+    @Override
     public String logout(String accessToken, String refreshToken) {
         Date accessTokenExpiry = jwtService.extractExpiration(accessToken);
         Date refreshTokenExpiry = jwtService.extractExpiration(refreshToken);
@@ -59,7 +61,7 @@ public class AuthenticationService {
 
         return "Logout successful!";
     }
-
+    @Override
     public AuthenticationResponseDTO refreshToken(Integer loggedInUserId) {
         User user = userDao.getUserById(loggedInUserId);
         return buildAuthenticationResponse(user);

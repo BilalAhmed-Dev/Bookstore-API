@@ -2,7 +2,7 @@ package com.backend.test.bookstore.filter;
 
 
 import com.backend.test.bookstore.entity.User;
-import com.backend.test.bookstore.serviceimpl.JwtService;
+import com.backend.test.bookstore.serviceimpl.JwtServiceImpl;
 import com.backend.test.bookstore.serviceimpl.UserDetailsServiceImp;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,11 +23,11 @@ import java.io.IOException;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final JwtService jwtService;
+    private final JwtServiceImpl jwtService;
     private final UserService userService;
     private final UserDetailsServiceImp userDetailsService;
 
-    public JwtAuthenticationFilter(JwtService jwtService, UserService userService, UserDetailsServiceImp userDetailsService) {
+    public JwtAuthenticationFilter(JwtServiceImpl jwtService, UserService userService, UserDetailsServiceImp userDetailsService) {
         this.jwtService = jwtService;
         this.userService = userService;
         this.userDetailsService = userDetailsService;

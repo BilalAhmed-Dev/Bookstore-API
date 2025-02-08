@@ -16,7 +16,7 @@ public class BookServiceImpl implements BookService {
 
     private final BookDao bookDao;
 
-    public BookServiceImpl(BookDao bookDao, JwtService jwtService) {
+    public BookServiceImpl(BookDao bookDao, JwtServiceImpl jwtService) {
         this.bookDao = bookDao;
     }
 

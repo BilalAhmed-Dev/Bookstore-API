@@ -2,7 +2,7 @@ package com.backend.test.bookstore.controller;
 
 import com.backend.test.bookstore.entity.CartItem;
 import com.backend.test.bookstore.service.CartService;
-import com.backend.test.bookstore.serviceimpl.JwtService;
+import com.backend.test.bookstore.serviceimpl.JwtServiceImpl;
 import com.backend.test.bookstore.utils.Msg;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +14,9 @@ import java.util.List;
 public class CartController {
 
     private final CartService cartService;
-    private final JwtService jwtService;
+    private final JwtServiceImpl jwtService;
 
-    public CartController(CartService cartService, JwtService jwtService) {
+    public CartController(CartService cartService, JwtServiceImpl jwtService) {
         this.cartService = cartService;
         this.jwtService = jwtService;
     }

@@ -1,6 +1,6 @@
 package com.backend.test.bookstore.exceptions;
 
-import com.backend.test.bookstore.dto.ApiExceptionContainer;
+import com.backend.test.bookstore.records.ApiExceptionContainer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

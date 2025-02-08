@@ -5,8 +5,7 @@ import com.backend.test.bookstore.dto.NewOrderDTO;
 import com.backend.test.bookstore.entity.Order;
 import com.backend.test.bookstore.service.OrderService;
 
-import com.backend.test.bookstore.serviceimpl.JwtService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.backend.test.bookstore.serviceimpl.JwtServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +16,9 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
-    private final JwtService jwtService;
+    private final JwtServiceImpl jwtService;
 
-    public OrderController(OrderService orderService, JwtService jwtService) {
+    public OrderController(OrderService orderService, JwtServiceImpl jwtService) {
         this.orderService = orderService;
         this.jwtService = jwtService;
     }

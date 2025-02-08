@@ -4,6 +4,7 @@ package com.backend.test.bookstore.serviceimpl;
 import com.backend.test.bookstore.entity.BlacklistedToken;
 import com.backend.test.bookstore.entity.User;
 import com.backend.test.bookstore.repository.TokenRepository;
+import com.backend.test.bookstore.service.JwtService;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -20,19 +21,21 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 @Service
-public class JwtService {
+public class JwtServiceImpl implements JwtService {
 
     private final AuthenticationConfiguration authenticationConfiguration;
-    private static final Logger logger = LoggerFactory.getLogger(JwtService.class);
+    private static final Logger logger = LoggerFactory.getLogger(JwtServiceImpl.class);
     private final TokenRepository tokenRepository;
 
-    public JwtService(AuthenticationConfiguration authenticationConfiguration, TokenRepository tokenRepository) {
+    public JwtServiceImpl(AuthenticationConfiguration authenticationConfiguration, TokenRepository tokenRepository) {
         this.authenticationConfiguration = authenticationConfiguration;
         this.tokenRepository = tokenRepository;
     }
 
 
     // TOKEN EXTRACTION
+
+    @Override
     public Integer extractUserId(String token) {
         Claims claims = extractAllClaims(token);
         String subject = claims.getSubject();
@@ -44,16 +47,19 @@ public class JwtService {
         }
     }
 
+    @Override
     public Integer getLoggedInUserId(HttpServletRequest request, String tokenType) {
         String token = extractAndValidateToken(request, tokenType);
         return extractUserId(token);
     }
 
+    @Override
     public Date extractExpiration(String token) {
         Claims claims = extractAllClaims(token);
         return claims.getExpiration();
     }
 
+    @Override
     public String extractAndValidateToken(HttpServletRequest request, String expectedType) {
         String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
@@ -68,6 +74,7 @@ public class JwtService {
 
 
     // TOKEN VALIDATION
+    @Override
     public Boolean validateToken(String token, String expectedType, boolean validateTokeType) {
         if (isTokenBlacklisted(token) || isTokenExpired(token)) {
             throw new InvalidTokenException("Token is invalid or expired");

@@ -1,6 +1,6 @@
 package com.backend.test.bookstore.cronjob;
 
-import com.backend.test.bookstore.serviceimpl.JwtService;
+import com.backend.test.bookstore.serviceimpl.JwtServiceImpl;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class EveryMorning10AmCronJobs {
 
-    private final JwtService jwtService;
+    private final JwtServiceImpl jwtService;
 
-    public EveryMorning10AmCronJobs(JwtService jwtService) {
+    public EveryMorning10AmCronJobs(JwtServiceImpl jwtService) {
         this.jwtService = jwtService;
     }
 
