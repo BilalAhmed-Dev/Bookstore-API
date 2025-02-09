@@ -1,6 +1,7 @@
 package com.backend.test.bookstore.serviceimpl;
 
 import com.backend.test.bookstore.dao.UserDao;
+import com.backend.test.bookstore.dto.LoginDTO;
 import com.backend.test.bookstore.dto.NewUserDTO;
 import com.backend.test.bookstore.dto.AuthenticationResponseDTO;
 import com.backend.test.bookstore.dto.UserInfoDTO;
@@ -43,10 +44,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return buildAuthenticationResponse(savedUser);
     }
     @Override
-    public AuthenticationResponseDTO login(NewUserDTO userRequest) {
+    public AuthenticationResponseDTO login(LoginDTO userRequest) {
         authenticateUser(userRequest.getEmail(), userRequest.getPassword());
 
-        User user = userDao.getUserByName(userRequest.getUsername());
+        User user = userDao.getByEmail(userRequest.getEmail());
 
 
         return buildAuthenticationResponse(user);

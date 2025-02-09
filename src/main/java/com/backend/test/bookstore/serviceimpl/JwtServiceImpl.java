@@ -120,11 +120,11 @@ public class JwtServiceImpl implements JwtService {
 
     // TOKEN GENERATION
     public String generateAccessToken(User user) {
-        return generateToken(user, authenticationConfiguration.getExpirationMs(), "accessToken");
+        return generateToken(user, authenticationConfiguration.getAccess(), "accessToken");
     }
 
     public String generateRefreshToken(User user) {
-        return generateToken(user, authenticationConfiguration.getRefreshExpirationMs(), "refreshToken");
+        return generateToken(user, authenticationConfiguration.getRefresh(), "refreshToken");
     }
 
 

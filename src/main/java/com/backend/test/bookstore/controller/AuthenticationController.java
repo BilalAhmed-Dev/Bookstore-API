@@ -1,5 +1,6 @@
 package com.backend.test.bookstore.controller;
 
+import com.backend.test.bookstore.dto.LoginDTO;
 import com.backend.test.bookstore.dto.NewUserDTO;
 import com.backend.test.bookstore.dto.AuthenticationResponseDTO;
 import com.backend.test.bookstore.records.TokenContainerDTO;
@@ -35,7 +36,7 @@ public class AuthenticationController {
     @PostMapping("login")
     @CrossOrigin
     public ResponseEntity<AuthenticationResponseDTO> login(
-            @RequestBody NewUserDTO user
+            @RequestBody LoginDTO user
     ) {
         return ResponseEntity.ok(authService.login(user));
     }

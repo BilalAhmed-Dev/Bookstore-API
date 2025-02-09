@@ -10,6 +10,6 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 public class AuthenticationConfiguration {
     private String secret;          // Maps to jwt.secret
-    private Long expirationMs;      // Maps to jwt.expiration.ms
-    private Long refreshExpirationMs; // Maps to jwt.refresh-expiration.ms
+    private Long access;      // Maps to jwt.access
+    private Long refresh; // Maps to jwt.refresh
 }

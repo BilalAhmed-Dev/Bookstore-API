@@ -21,7 +21,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getUserById(Integer userId) {
-        return userRepository.getById(userId);
+        return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User not exists by Username or Email"));
     }
 
 
