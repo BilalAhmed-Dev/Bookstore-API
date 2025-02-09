@@ -26,7 +26,7 @@ public class OrderController {
     @GetMapping("/getOrders")
     public List<GetOrderDTO> getOrder(HttpServletRequest request){
         System.out.println("getOrder");
-        Integer userId = jwtService.getLoggedInUserId(request, "accessToken");
+        String userId  = jwtService.getLoggedInUserId(request, "accessToken");
 
         return orderService.getOrder(userId);
     }
@@ -34,7 +34,7 @@ public class OrderController {
     @PostMapping("/checkout")
     public Order checkout(@RequestBody NewOrderDTO newOrderDTO, HttpServletRequest request){
         System.out.println("checkOut");
-        Integer userId = jwtService.getLoggedInUserId(request, "accessToken");
+        String userId  = jwtService.getLoggedInUserId(request, "accessToken");
         return orderService.addOrder(newOrderDTO, userId);
     }
 }

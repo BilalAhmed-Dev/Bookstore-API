@@ -20,7 +20,7 @@ public class UserDaoImpl implements UserDao {
 
 
     @Override
-    public User getUserById(Integer userId) {
+    public User getUserById(String userId ) {
         return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User not exists by Username or Email"));
     }
 
@@ -29,6 +29,16 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User saveUser(User user) {
        return userRepository.save(user);
+    }
+
+    @Override
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    };
+
+    @Override
+    public boolean existsByEmail(String email){
+        return userRepository.existsByEmail(email);
     }
 
     @Override

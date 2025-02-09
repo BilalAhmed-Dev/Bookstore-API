@@ -7,13 +7,16 @@ import com.backend.test.bookstore.dto.AuthenticationResponseDTO;
 import com.backend.test.bookstore.dto.UserInfoDTO;
 import com.backend.test.bookstore.entity.User;
 import com.backend.test.bookstore.exceptions.InvalidUsernameOrPasswordException;
+import com.backend.test.bookstore.exceptions.UserExistException;
 import com.backend.test.bookstore.service.AuthenticationService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -35,7 +38,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthenticationResponseDTO register(NewUserDTO user) {
+        if (userDao.existsByUsername(user.getUsername())) {
+            throw new UserExistException("Username already taken");
+        }
+
+        if (userDao.existsByEmail(user.getEmail())) {
+            throw new UserExistException("Email already registered");
+        }
+
         User userEntity = new User();
+        UUID uuid = UUID.randomUUID();
+        userEntity.setUserId(uuid.toString());
         userEntity.setUsername(user.getUsername());
         userEntity.setEmail(user.getEmail());
         userEntity.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -63,7 +76,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return "Logout successful!";
     }
     @Override
-    public AuthenticationResponseDTO refreshToken(Integer loggedInUserId) {
+    public AuthenticationResponseDTO refreshToken(String loggedInUserId ) {
         User user = userDao.getUserById(loggedInUserId);
         return buildAuthenticationResponse(user);
     }
@@ -86,6 +99,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         UserInfoDTO userInfo = new UserInfoDTO();
         userInfo.setUsername(user.getUsername());
         userInfo.setEmail(user.getEmail());
+        userInfo.setId(user.getUserId());
 
 
         String accessToken = jwtService.generateAccessToken(user);

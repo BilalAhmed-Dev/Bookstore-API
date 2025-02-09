@@ -7,5 +7,5 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 public interface OrderRepository extends JpaRepository<Order,Integer> {
     @Query(value = "from Order where user.userId = :userId ")
-    List<Order> getOrderByUserId(@Param("userId") Integer userId);
+    List<Order> getOrderByUserId(@Param("userId") String userId );
 }

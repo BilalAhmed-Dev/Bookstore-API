@@ -11,5 +11,5 @@ public interface AuthenticationService {
 
     String logout(String accessToken, String refreshToken);
 
-    AuthenticationResponseDTO refreshToken(Integer loggedInUserId);
+    AuthenticationResponseDTO refreshToken(String loggedInUserId );
 }

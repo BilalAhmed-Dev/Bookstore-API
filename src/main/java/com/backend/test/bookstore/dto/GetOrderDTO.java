@@ -24,7 +24,7 @@ public class GetOrderDTO {
     }
 
     private Timestamp time;
-    private Integer userId;
+    private String userId ;
     private String username;
     private List<GetOrderDTO.OrderItems> orderItemList;
     public GetOrderDTO(Order order){

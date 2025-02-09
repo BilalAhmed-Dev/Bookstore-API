@@ -21,7 +21,7 @@ public class CartItem {
     private Integer cartItemId;
 
     @Column(name="user_id")
-    private Integer userId;
+    private String userId ;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "book_id")

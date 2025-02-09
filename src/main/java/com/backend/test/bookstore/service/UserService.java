@@ -4,7 +4,7 @@ import com.backend.test.bookstore.entity.User;
 import com.backend.test.bookstore.utils.Msg;
 
 public interface UserService {
-    User getUserInfo(Integer userId);
+    User getUserInfo(String userId );
 
     Msg checkUsernameDup(String username);
 

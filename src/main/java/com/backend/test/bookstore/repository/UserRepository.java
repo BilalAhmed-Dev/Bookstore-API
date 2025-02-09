@@ -6,12 +6,14 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User,Integer> {
+public interface UserRepository extends JpaRepository<User,String> {
 
     @Query(value = "from User where username = :username and password = :password")
     User checkUser(@Param("username") String username, @Param("password") String password);
 
     Optional<User> getByEmail(String email);
+    boolean existsByUsername(String username);
+    boolean existsByEmail(String email);
 
     Optional<User> getByUsername(String username);
 }

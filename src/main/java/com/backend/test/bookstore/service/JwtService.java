@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 public interface JwtService {
-    Integer extractUserId(String token);
+    String extractUserId(String token);
 
-    Integer getLoggedInUserId(HttpServletRequest request, String tokenType);
+    String getLoggedInUserId(HttpServletRequest request, String tokenType);
 
     Date extractExpiration(String token);
 

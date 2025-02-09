@@ -6,8 +6,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface CartItemRepository extends JpaRepository<CartItem,Integer> {
-    List<CartItem> getByUserId(Integer userId);
-    void deleteByUserId(Integer userId);
+    List<CartItem> getByUserId(String userId );
+    void deleteByUserId(String userId );
     @Query(value = "from CartItem where userId = :userId and book.bookId = :bookId")
-    CartItem getCartItemByUserIdAndBookId(@Param("userId") Integer userId, @Param("bookId") Integer bookId);
+    CartItem getCartItemByUserIdAndBookId(@Param("userId") String userId , @Param("bookId") Integer bookId);
 }

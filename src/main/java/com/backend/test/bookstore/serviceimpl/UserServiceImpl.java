@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
 
 
-    public  User getUserInfo(Integer userId) {
+    public  User getUserInfo(String userId ) {
        return userDao.getUserById(userId);
     }
 

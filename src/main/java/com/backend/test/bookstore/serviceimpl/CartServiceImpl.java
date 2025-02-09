@@ -23,7 +23,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Msg addCartItem(int bookId, Integer userId) {
+    public Msg addCartItem(int bookId, String userId ) {
 
             CartItem cartItem= cartDao.getCartItemByUserIdAndBookId(userId, bookId);
             if(cartItem==null){
@@ -48,7 +48,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Msg decreaseAmount(int bookId, Integer userId) {
+    public Msg decreaseAmount(int bookId, String userId ) {
 
             CartItem cartItem= cartDao.getCartItemByUserIdAndBookId(userId,bookId);
             if(cartItem!=null&&cartItem.getAmount()>1){
@@ -64,7 +64,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Msg deleteCartItem(int bookId, Integer userId) {
+    public Msg deleteCartItem(int bookId, String userId ) {
 
             CartItem cartItem= cartDao.getCartItemByUserIdAndBookId(userId,bookId);
             if(cartItem!=null){
@@ -76,7 +76,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     @Transactional
-    public Msg deleteAll(Integer userId) {
+    public Msg deleteAll(String userId ) {
 
             cartDao.deleteCartByUserId(userId);
             return MsgUtil.makeMsg(MsgUtil.SUCCESS,MsgUtil.SUCCESS_MSG);
@@ -84,7 +84,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<CartItem> getCartByUserId(Integer userId) {
+    public List<CartItem> getCartByUserId(String userId ) {
 
             return cartDao.getCartItemsByUserId(userId);
 

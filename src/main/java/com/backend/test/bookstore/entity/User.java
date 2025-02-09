@@ -17,10 +17,8 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
     @Column(name = "user_id")
-    private Integer userId;
+    private String userId;
 
     @Column(name="username")
     private String username;

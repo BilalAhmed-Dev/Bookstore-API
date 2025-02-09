@@ -4,9 +4,9 @@ import com.backend.test.bookstore.utils.Msg;
 
 import java.util.List;
 public interface CartService {
-    Msg addCartItem(int bookId, Integer userId);
-    Msg decreaseAmount(int bookId, Integer userId);
-    Msg deleteCartItem(int bookId, Integer userId);
-    Msg deleteAll(Integer userId);
-    List<CartItem> getCartByUserId(Integer userId);
+    Msg addCartItem(int bookId, String userId );
+    Msg decreaseAmount(int bookId, String userId );
+    Msg deleteCartItem(int bookId, String userId );
+    Msg deleteAll(String userId );
+    List<CartItem> getCartByUserId(String userId );
 }

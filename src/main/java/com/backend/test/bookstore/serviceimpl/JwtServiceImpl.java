@@ -36,19 +36,19 @@ public class JwtServiceImpl implements JwtService {
     // TOKEN EXTRACTION
 
     @Override
-    public Integer extractUserId(String token) {
+    public String extractUserId(String token) {
         Claims claims = extractAllClaims(token);
         String subject = claims.getSubject();
 
         try {
-            return Integer.parseInt(subject);
+            return subject;
         } catch (NumberFormatException e) {
             throw new InvalidTokenException("User ID in token is not a valid number");
         }
     }
 
     @Override
-    public Integer getLoggedInUserId(HttpServletRequest request, String tokenType) {
+    public String getLoggedInUserId(HttpServletRequest request, String tokenType) {
         String token = extractAndValidateToken(request, tokenType);
         return extractUserId(token);
     }
@@ -134,10 +134,12 @@ public class JwtServiceImpl implements JwtService {
 
     // TOKEN BLACKLISTING
     public void blacklistToken(String token, Date expiryDate) {
+        if (tokenRepository.findByToken(token).isEmpty()) {
         BlacklistedToken blacklistedToken = new BlacklistedToken();
         blacklistedToken.setToken(token);
         blacklistedToken.setExpiryDate(expiryDate);
         tokenRepository.save(blacklistedToken);
+        }
     }
 
     public void cleanUpExpiredTokens() {

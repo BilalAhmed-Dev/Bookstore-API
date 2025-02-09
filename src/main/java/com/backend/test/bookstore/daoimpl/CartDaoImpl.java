@@ -23,12 +23,12 @@ public class CartDaoImpl implements CartDao {
     }
 
     @Override
-    public List<CartItem> getCartItemsByUserId(Integer userId) {
+    public List<CartItem> getCartItemsByUserId(String userId ) {
         return cartItemRepository.getByUserId(userId);
     }
 
     @Override
-    public CartItem getCartItemByUserIdAndBookId(Integer userId, Integer bookId) {
+    public CartItem getCartItemByUserIdAndBookId(String userId , Integer bookId) {
         return cartItemRepository.getCartItemByUserIdAndBookId(userId,bookId);
     }
 
@@ -43,7 +43,7 @@ public class CartDaoImpl implements CartDao {
     }
 
     @Override
-    public void deleteCartByUserId(Integer userId) {
+    public void deleteCartByUserId(String userId ) {
         cartItemRepository.deleteByUserId(userId);
     }
 

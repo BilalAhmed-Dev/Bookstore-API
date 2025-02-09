@@ -34,7 +34,7 @@ public class OrderServiceImpl implements OrderService {
     private UserDao userDao;
 
     @Override
-    public List<GetOrderDTO> getOrder(Integer userId) {
+    public List<GetOrderDTO> getOrder(String userId ) {
             List<Order> orderList;
             orderList=orderDao.getOrderByUserId(userId);
           
@@ -48,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public Order addOrder(NewOrderDTO newOrderDTO, Integer userId) {
+    public Order addOrder(NewOrderDTO newOrderDTO, String userId ) {
 
             Order newOrder = new Order();
             Timestamp orderTime = new Timestamp(System.currentTimeMillis());

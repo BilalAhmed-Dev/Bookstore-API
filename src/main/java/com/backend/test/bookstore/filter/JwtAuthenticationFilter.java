@@ -45,7 +45,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        Integer userId = jwtService.extractUserId(token);
+        String userId  = jwtService.extractUserId(token);
         if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             authenticateUser(token, userId, request);
         }
@@ -64,7 +64,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         return null;
     }
 
-    private void authenticateUser(String token, Integer userId, HttpServletRequest request) {
+    private void authenticateUser(String token, String userId , HttpServletRequest request) {
         User userInfo = userService.getUserInfo(userId);
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(userInfo.getUsername());

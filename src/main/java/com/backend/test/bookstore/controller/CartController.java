@@ -24,34 +24,34 @@ public class CartController {
     @PostMapping("/add")
     public Msg addCartItem(@RequestParam("bookId")int bookId, HttpServletRequest request) {
         System.out.println("addCartItem");
-        Integer userId = jwtService.getLoggedInUserId(request, "accessToken");
+        String userId  = jwtService.getLoggedInUserId(request, "accessToken");
         return cartService.addCartItem(bookId, userId);
     }
 
     @GetMapping("/getCart")
     public List<CartItem> getCartList(HttpServletRequest request){
-        Integer userId = jwtService.getLoggedInUserId(request, "accessToken");
+        String userId  = jwtService.getLoggedInUserId(request, "accessToken");
         System.out.println("getCart");
         return cartService.getCartByUserId(userId);
     }
 
     @PutMapping("/decreaseCartAmount")
     public Msg decreaseCartAmount(@RequestParam("bookId")int bookId , HttpServletRequest request){
-        Integer userId = jwtService.getLoggedInUserId(request, "accessToken");
+        String userId  = jwtService.getLoggedInUserId(request, "accessToken");
         System.out.println("decreaseCartAmount");
         return cartService.decreaseAmount(bookId, userId);
     }
 
     @DeleteMapping("/deleteCartItem")
     public Msg deleteCartItem(@RequestParam("bookId")int bookId , HttpServletRequest request){
-        Integer userId = jwtService.getLoggedInUserId(request, "accessToken");
+        String userId  = jwtService.getLoggedInUserId(request, "accessToken");
         System.out.println("deleteCartItem");
         return cartService.deleteCartItem(bookId, userId);
     }
 
     @DeleteMapping("/deleteAllCartItem")
     public Msg deleteAllCartItem(HttpServletRequest request){
-        Integer userId = jwtService.getLoggedInUserId(request, "accessToken");
+        String userId  = jwtService.getLoggedInUserId(request, "accessToken");
         System.out.println("deleteAllCartItem");
         return cartService.deleteAll(userId);
     }

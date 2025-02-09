@@ -18,14 +18,10 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public List<Order> getOrderByUserId(int userId) {
+    public List<Order> getOrderByUserId(String userId) {
         return orderRepository.getOrderByUserId(userId);
     }
 
-    @Override
-    public List<Order> getAllOrders() {
-        return orderRepository.findAll();
-    }
 
     @Override
     public Order saveOrder(Order order) {

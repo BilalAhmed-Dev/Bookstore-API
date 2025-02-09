@@ -53,7 +53,7 @@ public class AuthenticationController {
             HttpServletRequest request
     ) {
         // Only valid refresh tokens are permitted for use at this endpoint.
-        Integer loggedInUserId = jwtService.getLoggedInUserId(request, "refreshToken");
+        String loggedInUserId  = jwtService.getLoggedInUserId(request, "refreshToken");
         return ResponseEntity.ok(authService.refreshToken(loggedInUserId));
     }
 }
