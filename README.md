@@ -1,6 +1,6 @@
 # Bookstore API
 ### Video Demonstration
-[![Demo Video](http://img.youtube.com/vi/lkjQrG431RA/0.jpg)](https://www.youtube.com/watch?v=lkjQrG431RA)
+[![Demo Video](http://img.youtube.com/vi/lkjQrG431RA/hqdefault.jpg)](https://www.youtube.com/watch?v=lkjQrG431RA)
 ## Overview
 The Bookstore API is a Spring Boot application designed to manage bookstore operations. It utilizes Spring Boot Starter Web for web services, Spring Boot Starter Data JPA for database interactions, and Spring Security for authentication and authorization.
 
