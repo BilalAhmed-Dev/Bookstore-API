@@ -78,8 +78,7 @@ VALUES
         'dev@test.com'
     );
 
-INSERT INTO
-    books (
+INSERT INTO books (
     title,
     author,
     genre,
@@ -89,41 +88,41 @@ INSERT INTO
     inventory,
     description,
     image_url
-)
-VALUES
-    (
-        'Clean Code',
-        'Robert C. Martin',
-        'Programming',
-        45,
-        'IN_STOCK',
-        50,
-        100,
-        'Software engineering best practices',
-        'http://example.com/clean-code.jpg'
-    ),
-    (
-        'Design Patterns',
-        'Gamma et al.',
-        'Computer Science',
-        55,
-        'OUT_OF_STOCK',
-        60,
-        0,
-        'Classic patterns reference',
-        'http://example.com/patterns.jpg'
-    ),
-    (
-        'The Pragmatic Programmer',
-        'Andrew Hunt',
-        'Software Development',
-        40,
-        'IN_STOCK',
-        45,
-        75,
-        'Developer career handbook',
-        'http://example.com/pragmatic.jpg'
-    );
+) VALUES
+      -- Programming (3)
+      ('Clean Code', 'Robert C. Martin', 'Programming', 45, 'IN_STOCK', 50, 100, 'Software engineering best practices', '/images/clean-code.jpg'),
+      ('Code Complete', 'Steve McConnell', 'Programming', 50, 'IN_STOCK', 55, 80, 'Practical construction techniques', '/images/code-complete.jpg'),
+      ('Refactoring', 'Martin Fowler', 'Programming', 40, 'OUT_OF_STOCK', 45, 0, 'Improving code structure', '/images/refactoring.jpg'),
+
+      -- Algorithms (3)
+      ('Introduction to Algorithms', 'Cormen et al.', 'Algorithms', 60, 'IN_STOCK', 65, 50, 'Comprehensive algorithm guide', '/images/algo-intro.jpg'),
+      ('Algorithm Design Manual', 'Steven Skiena', 'Algorithms', 55, 'IN_STOCK', 60, 30, 'Practical algorithm approaches', '/images/algo-manual.jpg'),
+      ('Grokking Algorithms', 'Aditya Bhargava', 'Algorithms', 35, 'OUT_OF_STOCK', 40, 0, 'Visual algorithm guide', '/images/grokking-algo.jpg'),
+
+      -- Web Development (3)
+      ('Eloquent JavaScript', 'Marijn Haverbeke', 'Web Development', 30, 'IN_STOCK', 35, 120, 'Modern JS fundamentals', '/images/eloquent-js.jpg'),
+      ('You Don''t Know JS', 'Kyle Simpson', 'Web Development', 25, 'IN_STOCK', 30, 90, 'Deep JS concepts', '/images/ydkjs.jpg'),
+      ('HTTP: The Definitive Guide', 'David Gourley', 'Web Development', 40, 'OUT_OF_STOCK', 45, 0, 'Web protocol deep dive', '/images/http-guide.jpg'),
+
+      -- Databases (3)
+      ('Designing Data-Intensive Apps', 'Martin Kleppmann', 'Databases', 50, 'IN_STOCK', 55, 60, 'Modern database patterns', '/images/ddia.jpg'),
+      ('SQL Performance Explained', 'Markus Winand', 'Databases', 45, 'IN_STOCK', 50, 40, 'Query optimization guide', '/images/sql-perf.jpg'),
+      ('Redis in Action', 'Josiah Carlson', 'Databases', 35, 'OUT_OF_STOCK', 40, 0, 'Redis practical guide', '/images/redis-action.jpg'),
+
+      -- DevOps (3)
+      ('The Phoenix Project', 'Gene Kim', 'DevOps', 40, 'IN_STOCK', 45, 70, 'DevOps novel approach', '/images/phoenix-project.jpg'),
+      ('Site Reliability Engineering', 'Betsy Beyer', 'DevOps', 55, 'IN_STOCK', 60, 50, 'Google SRE practices', '/images/sre-book.jpg'),
+      ('Kubernetes Up & Running', 'Kelsey Hightower', 'DevOps', 50, 'OUT_OF_STOCK', 55, 0, 'K8s practical guide', '/images/k8s-book.jpg'),
+
+      -- Security (3)
+      ('Hacking: The Art of Exploitation', 'Jon Erickson', 'Security', 45, 'IN_STOCK', 50, 30, 'Low-level security concepts', '/images/hacking-art.jpg'),
+      ('Web Application Security', 'Andrew Hoffman', 'Security', 50, 'IN_STOCK', 55, 40, 'Modern web security', '/images/web-app-sec.jpg'),
+      ('Cryptography Engineering', 'Bruce Schneier', 'Security', 60, 'OUT_OF_STOCK', 65, 0, 'Practical cryptography', '/images/crypto-eng.jpg'),
+
+      -- Software Architecture (3)
+      ('Domain-Driven Design', 'Eric Evans', 'Software Architecture', 55, 'IN_STOCK', 60, 45, 'Strategic design patterns', '/images/ddd-book.jpg'),
+      ('Building Microservices', 'Sam Newman', 'Software Architecture', 50, 'IN_STOCK', 55, 35, 'Distributed system design', '/images/microservices-book.jpg'),
+      ('Patterns of Enterprise Application Architecture', 'Martin Fowler', 'Software Architecture', 60, 'OUT_OF_STOCK', 65, 0, 'Architectural patterns', '/images/poeaa.jpg');
 
 INSERT INTO
     orders (user_id, order_date)

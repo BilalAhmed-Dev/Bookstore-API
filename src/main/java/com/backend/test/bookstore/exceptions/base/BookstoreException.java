@@ -10,7 +10,4 @@ public sealed abstract class BookstoreException extends RuntimeException
         super(message);
     }
 
-    public BookstoreException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }

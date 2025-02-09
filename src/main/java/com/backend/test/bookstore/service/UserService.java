@@ -6,6 +6,4 @@ import com.backend.test.bookstore.utils.Msg;
 public interface UserService {
     User getUserInfo(String userId );
 
-    Msg checkUsernameDup(String username);
-
 }
