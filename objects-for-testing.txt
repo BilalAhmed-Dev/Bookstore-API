@@ -1,5 +1,6 @@
 
 books/editBook
+
 {
   "bookId": 1,
   "title": "Clean Code",
@@ -13,7 +14,9 @@ books/editBook
   "inventory": 100
 }
 
+
 books/addBook
+
 {
   "title": "Effective Java",
   "author": "Joshua Bloch",
@@ -26,7 +29,9 @@ books/addBook
   "inventory": 75
 }
 
+
 order/checkout
+
 {
   "orderItemList": [
     {
