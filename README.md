@@ -1,6 +1,5 @@
 # Bookstore API
-### Video Demonstration
-[![Demo Video](http://img.youtube.com/vi/lkjQrG431RA/hqdefault.jpg)](https://www.youtube.com/watch?v=lkjQrG431RA)
+
 ## Overview
 The Bookstore API is a Spring Boot application designed to manage bookstore operations. It utilizes Spring Boot Starter Web for web services, Spring Boot Starter Data JPA for database interactions, and Spring Security for authentication and authorization.
 
@@ -35,3 +34,6 @@ To run this project, follow these steps:
 3. **Start the Application**: Run the application using `mvn spring-boot:run`.
 4. **Base URL**: `http://localhost:8080`
 5. **Access Swagger UI**: Navigate to `http://localhost:8080/swagger-ui/index.html` to view API documentation.
+
+## Testing The Bookstore API Video Demonstration
+[View Demo Video](https://www.youtube.com/watch?v=lkjQrG431RA)
