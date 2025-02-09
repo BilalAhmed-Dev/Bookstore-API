@@ -1,0 +1,49 @@
+
+books/editBook
+{
+  "bookId": 1,
+  "title": "Clean Code",
+  "author": "Robert C. Martin",
+  "genre": "Programming",
+  "price": 85,
+  "availabilityStatus": "IN_STOCK",
+  "originPrice": 70,
+  "description": "Software engineering best practices",
+  "imageUrl": "/images/clean-code.jpg",
+  "inventory": 100
+}
+
+books/addBook
+{
+  "title": "Effective Java",
+  "author": "Joshua Bloch",
+  "genre": "Programming",
+  "price": 50,
+  "availabilityStatus": "IN_STOCK",
+  "originPrice": 55,
+  "description": "Java best practices and design patterns",
+  "imageUrl": "/images/effective-java.jpg",
+  "inventory": 75
+}
+
+order/checkout
+{
+  "orderItemList": [
+    {
+      "bookId": 1,
+      "bookNumber": 2
+    },
+    {
+      "bookId": 4,
+      "bookNumber": 1
+    },
+    {
+      "bookId": 7,
+      "bookNumber": 3
+    },
+    {
+      "bookId": 10,
+      "bookNumber": 1
+    }
+  ]
+}
