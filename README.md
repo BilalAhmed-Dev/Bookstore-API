@@ -3,9 +3,6 @@
 ## Overview
 The Bookstore API is a Spring Boot application designed to manage bookstore operations. It utilizes Spring Boot Starter Web for web services, Spring Boot Starter Data JPA for database interactions, and Spring Security for authentication and authorization.
 
-### Testing The Bookstore API End points Video Demonstration
-[Bookstore API Backend Test - Bilal Ahmed](https://www.youtube.com/watch?v=lkjQrG431RA)
-
 ## Authentication
 - JWT authentication required for all endpoints except for Swagger endpoints and `/auth/*`
 - Access token must be included in `Authorization` header as `Bearer <token>`
